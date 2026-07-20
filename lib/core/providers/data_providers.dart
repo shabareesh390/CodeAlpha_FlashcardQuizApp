@@ -19,12 +19,10 @@ import '../../features/statistics/data/repositories/stats_repository_impl.dart';
 import '../../features/statistics/domain/entities/user_stats.dart';
 import '../../features/statistics/domain/repositories/stats_repository.dart';
 
-// Firestore
 final firestoreProvider = Provider<FirebaseFirestore>((ref) {
   return FirebaseFirestore.instance;
 });
 
-// Local Data Sources (Hive)
 final subjectLocalDataSourceProvider = Provider<SubjectLocalDataSource>((ref) {
   final box = Hive.box<Subject>('subjects');
   return SubjectLocalDataSourceImpl(box);
@@ -40,7 +38,6 @@ final statsLocalDataSourceProvider = Provider<StatsLocalDataSource>((ref) {
   return StatsLocalDataSourceImpl(box);
 });
 
-// Remote Data Sources (Firestore)
 final subjectRemoteDataSourceProvider = Provider<SubjectRemoteDataSource>((ref) {
   return SubjectRemoteDataSourceImpl(ref.watch(firestoreProvider));
 });
@@ -53,7 +50,6 @@ final statsRemoteDataSourceProvider = Provider<StatsRemoteDataSource>((ref) {
   return StatsRemoteDataSourceImpl();
 });
 
-// Repositories
 final subjectRepositoryProvider = Provider<SubjectRepository>((ref) {
   return SubjectRepositoryImpl(
     ref.watch(subjectLocalDataSourceProvider),

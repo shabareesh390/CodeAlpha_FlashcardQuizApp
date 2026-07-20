@@ -29,7 +29,6 @@ class FlashcardsNotifier extends AsyncNotifier<List<Flashcard>> {
       return [];
     }
 
-    // Ensure sync happens in background and updates UI when done
     _repository.syncRemoteToLocal().then((_) async {
       final updated = await _repository.getFlashcardsBySubject(subjectId);
       state = AsyncData(updated);
@@ -45,7 +44,6 @@ class FlashcardsNotifier extends AsyncNotifier<List<Flashcard>> {
         state = const AsyncValue.loading();
         state = await AsyncValue.guard(() => _repository.getFlashcardsBySubject(subjectId));
         
-        // Update subject's card count
         final subjectRepo = ref.read(subjectRepositoryProvider);
         final subjects = await subjectRepo.getAllSubjects();
         final subjectIndex = subjects.indexWhere((s) => s.id == subjectId);
@@ -81,7 +79,6 @@ class FlashcardsNotifier extends AsyncNotifier<List<Flashcard>> {
         state = const AsyncValue.loading();
         state = await AsyncValue.guard(() => _repository.getFlashcardsBySubject(subjectId));
         
-        // Update subject's card count
         final subjectRepo = ref.read(subjectRepositoryProvider);
         final subjects = await subjectRepo.getAllSubjects();
         final subjectIndex = subjects.indexWhere((s) => s.id == subjectId);

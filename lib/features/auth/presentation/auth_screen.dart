@@ -90,7 +90,6 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
       }
     } catch (e) {
       if (mounted) {
-        // Ignore exception if user aborted
         if (!e.toString().contains('aborted')) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(e.toString()), backgroundColor: AppColors.error),
@@ -114,7 +113,6 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 40),
-              // Logo
               Center(
                 child: Container(
                   width: 80,
@@ -159,7 +157,6 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
               
               const SizedBox(height: 48),
               
-              // Email Input
               TextField(
                 controller: _emailController,
                 decoration: const InputDecoration(
@@ -171,7 +168,6 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
               
               const SizedBox(height: 16),
               
-              // Password Input
               TextField(
                 controller: _passwordController,
                 decoration: const InputDecoration(
@@ -184,7 +180,6 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
               if (!_isLogin) ...[
                 const SizedBox(height: 16),
                 
-                // Confirm Password Input
                 TextField(
                   controller: _confirmPasswordController,
                   decoration: const InputDecoration(

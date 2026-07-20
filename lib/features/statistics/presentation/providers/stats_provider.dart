@@ -14,7 +14,6 @@ class StatsNotifier extends AsyncNotifier<UserStats> {
     final user = ref.watch(currentUserProvider);
     _userId = user?.uid ?? 'guest';
 
-    // Ensure sync happens in background and updates UI when done
     _repository.syncRemoteToLocal().then((_) async {
       final updated = await _repository.getStats(_userId!);
       state = AsyncData(updated);
@@ -31,14 +30,12 @@ class StatsNotifier extends AsyncNotifier<UserStats> {
     final now = DateTime.now();
     bool isNewDay = false;
     
-    // Check if it's a new day
     if (currentStats.lastReviewDate.year != now.year ||
         currentStats.lastReviewDate.month != now.month ||
         currentStats.lastReviewDate.day != now.day) {
       isNewDay = true;
     }
 
-    // Calculate streak
     int newStreak = currentStats.streakDays;
     if (isNewDay) {
       final difference = now.difference(currentStats.lastReviewDate).inDays;
@@ -47,7 +44,6 @@ class StatsNotifier extends AsyncNotifier<UserStats> {
       } else if (difference > 1) {
         newStreak = 1;
       } else {
-        // Same day theoretically, but we already handled new day.
         if (currentStats.streakDays == 0) {
             newStreak = 1;
         }
@@ -74,7 +70,6 @@ class StatsNotifier extends AsyncNotifier<UserStats> {
       await _repository.updateStats(updatedStats);
       state = AsyncData(updatedStats);
     } catch (e) {
-      // Revert if error? For local first, it shouldn't fail.
     }
   }
 }

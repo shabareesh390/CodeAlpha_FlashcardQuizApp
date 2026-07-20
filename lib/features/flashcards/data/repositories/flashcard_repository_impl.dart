@@ -17,14 +17,11 @@ class FlashcardRepositoryImpl implements FlashcardRepository {
 
   @override
   Future<void> addFlashcard(Flashcard flashcard) async {
-    // 1. Save to local database (fast UI response)
     await _localDataSource.addFlashcard(flashcard);
 
-    // 2. Sync to Firestore in background if authenticated
     final user = _authRepository.currentUser;
     if (user != null) {
       _remoteDataSource.syncFlashcard(flashcard, user.uid).catchError((_) {
-        // Handle sync error or queue for later
       });
     }
   }
@@ -51,7 +48,6 @@ class FlashcardRepositoryImpl implements FlashcardRepository {
 
   @override
   Future<List<Flashcard>> getFlashcardsBySubject(String subjectId) async {
-    // Always read from local as single source of truth for fast UI
     return _localDataSource.getFlashcardsBySubject(subjectId);
   }
 
@@ -63,7 +59,6 @@ class FlashcardRepositoryImpl implements FlashcardRepository {
         final remoteCards = await _remoteDataSource.fetchUserFlashcards(user.uid);
         await _localDataSource.cacheFlashcards(remoteCards);
       } catch (e) {
-        // Handle sync error
       }
     }
   }
@@ -78,7 +73,6 @@ class FlashcardRepositoryImpl implements FlashcardRepository {
           await _remoteDataSource.syncFlashcard(flashcard, user.uid);
         }
       } catch (e) {
-        // Handle sync error
       }
     }
   }

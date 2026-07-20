@@ -25,7 +25,6 @@ class ProfileScreen extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.all(24),
         children: [
-          // Profile Header
           Center(
             child: Column(
               children: [
@@ -51,7 +50,6 @@ class ProfileScreen extends ConsumerWidget {
           
           const SizedBox(height: 48),
           
-          // Settings
           Text(
             'Settings',
             style: Theme.of(context).textTheme.titleLarge,
@@ -88,15 +86,12 @@ class ProfileScreen extends ConsumerWidget {
                       final flashcardRepo = ref.read(flashcardRepositoryProvider);
                       final statsRepo = ref.read(statsRepositoryProvider);
                       
-                      // Backup to Firestore
                       await subjectRepo.syncAllLocalToRemote();
                       await flashcardRepo.syncAllLocalToRemote();
                       await statsRepo.syncAllLocalToRemote();
                       
-                      // Fetch from Firestore
                       await subjectRepo.syncRemoteToLocal();
                       await statsRepo.syncRemoteToLocal();
-                      // Flashcards sync on demand when viewing a subject
                       
                       ref.invalidate(subjectsProvider);
                       ref.invalidate(statsProvider);

@@ -45,7 +45,6 @@ class StatsRepositoryImpl implements StatsRepository {
           await _localDataSource.saveStats(remoteStats);
         }
       } catch (e) {
-        // Handle error quietly in background
       }
     }
   }

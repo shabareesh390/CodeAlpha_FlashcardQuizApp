@@ -58,7 +58,6 @@ class SubjectRepositoryImpl implements SubjectRepository {
         final remoteSubjects = await _remoteDataSource.fetchUserSubjects(user.uid);
         await _localDataSource.cacheSubjects(remoteSubjects);
       } catch (e) {
-        // Handle sync error
       }
     }
   }
@@ -73,7 +72,6 @@ class SubjectRepositoryImpl implements SubjectRepository {
           await _remoteDataSource.syncSubject(subject, user.uid);
         }
       } catch (e) {
-        // Handle sync error
       }
     }
   }

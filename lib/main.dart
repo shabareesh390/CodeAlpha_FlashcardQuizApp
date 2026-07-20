@@ -16,23 +16,19 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
   
-  // Initialize Hive for local storage
   await Hive.initFlutter();
   Hive.registerAdapter(SubjectAdapter());
   Hive.registerAdapter(FlashcardAdapter());
   Hive.registerAdapter(UserStatsAdapter());
   
-  // Open boxes
   await Hive.openBox<Subject>('subjects');
   await Hive.openBox<Flashcard>('flashcards');
   await Hive.openBox<UserStats>('stats');
   
-  // Initialize Firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Initialize Google Sign In
   await GoogleSignIn.instance.initialize();
 
   runApp(

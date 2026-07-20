@@ -62,12 +62,10 @@ class _SharedViewerScreenState extends ConsumerState<SharedViewerScreen> {
   }
 
   void _markLearned(int totalCards, dynamic currentCard) {
-    // Shared decks are stateless for guests.
     _nextCard(totalCards);
   }
 
   void _markForgot(int totalCards, dynamic currentCard) {
-    // Shared decks are stateless for guests.
     _nextCard(totalCards);
   }
 
@@ -122,7 +120,6 @@ class _SharedViewerScreenState extends ConsumerState<SharedViewerScreen> {
                   padding: const EdgeInsets.all(24.0),
                   child: Column(
                     children: [
-                      // Progress Bar
                       LinearProgressIndicator(
                         value: (_currentIndex + 1) / cards.length,
                         backgroundColor: AppColors.surface,
@@ -152,8 +149,6 @@ class _SharedViewerScreenState extends ConsumerState<SharedViewerScreen> {
                                 const SizedBox(height: 24),
                                 ElevatedButton(
                                   onPressed: () {
-                                     // For guests without a router stack, popping might just close. 
-                                     // So we just reset state here or let them pop.
                                      if (Navigator.of(context).canPop()) {
                                          Navigator.of(context).pop();
                                      } else {
@@ -181,7 +176,6 @@ class _SharedViewerScreenState extends ConsumerState<SharedViewerScreen> {
                       const SizedBox(height: 48),
                       
                       if (!showFinished)
-                        // Controls
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [

@@ -144,7 +144,6 @@ class _FlashcardViewerScreenState extends ConsumerState<FlashcardViewerScreen> {
                   padding: const EdgeInsets.all(24.0),
                   child: Column(
                     children: [
-                      // Progress Bar
                       LinearProgressIndicator(
                         value: (_currentIndex + 1) / cards.length,
                         backgroundColor: AppColors.surface,
@@ -192,7 +191,6 @@ class _FlashcardViewerScreenState extends ConsumerState<FlashcardViewerScreen> {
                       const SizedBox(height: 48),
                       
                       if (!showFinished)
-                        // Controls
                         FittedBox(
                           fit: BoxFit.scaleDown,
                           child: Row(

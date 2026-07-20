@@ -70,7 +70,6 @@ class DashboardScreen extends ConsumerWidget {
           
           const SizedBox(height: 32),
           
-          // Stats Grid
           GridView.count(
             crossAxisCount: 2,
             shrinkWrap: true,

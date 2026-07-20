@@ -20,7 +20,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   }
 
   Future<void> _navigateToNext() async {
-    // Artificial delay to show the beautiful splash animation
     await Future.delayed(const Duration(seconds: 3));
     
     if (mounted) {
@@ -41,7 +40,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Using a rounded container for the logo to give it a premium feel
             Container(
               width: 120,
               height: 120,

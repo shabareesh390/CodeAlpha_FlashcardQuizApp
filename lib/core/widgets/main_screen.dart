@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../constants/app_colors.dart';
 
-// Import tabs when created
 import '../../features/dashboard/presentation/dashboard_screen.dart';
 import '../../features/subjects/presentation/subjects_screen.dart';
 import '../../features/profile/presentation/profile_screen.dart';
@@ -27,7 +26,6 @@ class _MainScreenState extends ConsumerState<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Determine if we are on a wide screen (Web/Desktop)
     final isDesktop = MediaQuery.of(context).size.width >= 800;
 
     if (isDesktop) {

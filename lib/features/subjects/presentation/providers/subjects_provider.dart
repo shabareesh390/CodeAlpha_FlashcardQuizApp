@@ -9,7 +9,6 @@ class SubjectsNotifier extends AsyncNotifier<List<Subject>> {
   @override
   Future<List<Subject>> build() async {
     _repository = ref.watch(subjectRepositoryProvider);
-    // Ensure sync happens in background and updates UI when done
     _repository.syncRemoteToLocal().then((_) async {
       final updated = await _repository.getAllSubjects();
       state = AsyncData(updated);
@@ -20,11 +19,9 @@ class SubjectsNotifier extends AsyncNotifier<List<Subject>> {
   Future<void> addSubject(Subject subject) async {
     try {
       await _repository.addSubject(subject);
-      // Reload subjects to update the state
       state = const AsyncValue.loading();
       state = await AsyncValue.guard(() => _repository.getAllSubjects());
     } catch (e) {
-      // Error handling can be managed by the UI via listener or snackbar
       rethrow;
     }
   }
